@@ -2,7 +2,6 @@ package com.nibado.raspberry.picamctrl.image;
 
 import com.nibado.raspberry.picamctrl.Application;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -12,9 +11,9 @@ public class Images {
             return duke();
         }
 
-        Runtime.getRuntime().exec(new String[]{"raspistill", "-o", "tstimg.jpg", "-t", "100", "-md", "4"});
+        Process process = Runtime.getRuntime().exec(new String[]{"raspistill", "-o", "-", "-t", "100", "-md", "4"});
 
-        return new FileInputStream("tstimg.jpg");
+        return process.getInputStream();
     }
 
     private static InputStream duke() {
